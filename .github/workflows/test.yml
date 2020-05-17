@@ -2,7 +2,7 @@ name: test
 on: push
 
 jobs:
-  repository-dispatch:
+  test:
     runs-on: ubuntu-latest
     steps:
     - run: echo ${{github.ref}}
@@ -10,10 +10,3 @@ jobs:
       if: github.ref == 'refs/heads/master'
     - run: echo 'branch is not master'
       if: github.ref != 'refs/heads/master'
-    #   - name: Repository Dispatch
-    #     uses: peter-evans/repository-dispatch@v1.1.0
-    #     with:
-    #       token: ${{ secrets.REPO_ACCESS_TOKEN }}
-    #       repository: naoyaUda/laravel-tweet-ddd
-    #       event-type: deploy
-    #       client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
