@@ -1,11 +1,14 @@
-name: build-and-test
+name: test
 on: push
 
 jobs:
   repository-dispatch:
     runs-on: ubuntu-latest
     steps:
-    - run: echo ${{github.ref}}
+    - run: |
+      echo ${{github.ref}}
+    - run: echo hello
+      - if: github.ref == 'refs/heads/master'
     #   - name: Repository Dispatch
     #     uses: peter-evans/repository-dispatch@v1.1.0
     #     with:
