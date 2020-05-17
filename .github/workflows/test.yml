@@ -5,8 +5,7 @@ jobs:
   repository-dispatch:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-      echo ${{github.ref}}
+    - run: echo ${{github.ref}}
     - run: echo hello
       if: github.ref == 'refs/heads/master'
     #   - name: Repository Dispatch
