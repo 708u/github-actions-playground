@@ -9,6 +9,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Get Diff Action
         uses: technote-space/get-diff-action@v1.2.8
+        id: git_diff
         with:
           SUFFIX_FILTER: .test
       - run: echo '${{ steps.git_diff.outputs.count }}'
