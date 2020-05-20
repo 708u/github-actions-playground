@@ -1,8 +1,6 @@
 name: job-flow-test
 on:
   push:
-    branches:
-      - master
 
 jobs:
   job1:
@@ -13,12 +11,11 @@ jobs:
         uses: technote-space/get-diff-action@v1.2.8
         with:
           SUFFIX_FILTER: .test
-      - run: echo 'added'
-        if: steps.git_diff.outputs.diff
+      - run: echo ${{ steps.git_diff.outputs.count }}
 
   job2:
     needs: job1
     runs-on: ubuntu-latest
     steps:
       - run: echo 'hello'
-      
+
