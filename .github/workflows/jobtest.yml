@@ -12,7 +12,7 @@ jobs:
         with:
           SUFFIX_FILTER: .test
       - run: echo OK
-       -if: ${{ steps.git_diff.outputs.diff }}
+        if: ${{ steps.git_diff.outputs.diff }}
 
   job2:
     needs: job1
