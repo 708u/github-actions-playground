@@ -5,6 +5,13 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: git diff --name-status remotes/origin/master >> test.txt
-    - run: cat test.txt
+      - uses: actions/checkout@v2
+      - run: git diff --name-status remotes/origin/master >> test.txt
+      - run: cat test.txt
+  
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'hello'
+      
