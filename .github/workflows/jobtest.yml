@@ -1,9 +1,10 @@
-name: test
+name: job-flow-test
 on: push
 
 jobs:
-  test:
+  job1:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: git diff --name-status remotes/origin/master
+    - run: git diff --name-status remotes/origin/master >> test.txt
+    - run: cat test.txt
