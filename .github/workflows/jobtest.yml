@@ -11,6 +11,7 @@ jobs:
         uses: technote-space/get-diff-action@v1.2.8
         with:
           SUFFIX_FILTER: .test
+      - run: echo '${{ steps.git_diff.outputs.count }}'
       - run: echo OK
         if: ${{ steps.git_diff.outputs.count > 0}}
 
