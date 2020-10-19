@@ -23,9 +23,7 @@ jobs:
 
     - name: Create comments
       run: |
-        BEFORE_SHA=$(jq -r '.before' $GITHUB_EVENT_PATH)
-        AFTER_SHA=$(jq -r '.after' $GITHUB_EVENT_PATH)
-        git log --reverse --no-merges --pretty=format:"- %s" ${BEFORE_SHA}..${AFTER_SHA} | cat
+        git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }}
 
     - name: Post multi-line comments
       env:
