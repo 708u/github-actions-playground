@@ -17,8 +17,7 @@ jobs:
     steps:
     - name: Create comments
       run: |
-      first=$(sed)
-      git log --reverse --no-merges --pretty=format:"- %s" $first..$second | cat >> comments
+      git log --reverse --no-merges --pretty=format:"- %s" master..test | cat >> comments
 
 
     - name: Post multi-line comments
