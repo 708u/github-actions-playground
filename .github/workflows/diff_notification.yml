@@ -9,17 +9,21 @@ on:
 #       - staging
 #     types: opened
 
+env:
+    TARGET_BRANCH: ${{ github.base_ref }}
+
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@v2
       with:
         fetch-depth: 0
 
     - name: Create comments
       run: |
-        git log --reverse --no-merges --pretty=format:"- %s" master..test | cat >> comments
+        git fetch --depth 1 origin ${TARGET_BRANCH}
+        git log --reverse --no-merges --pretty=format:"- %s" master..${TARGET_BRANCH} | cat >> comments
 
     - name: Post multi-line comments
       env:
