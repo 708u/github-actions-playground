@@ -15,6 +15,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: Create comments
       run: |
         git log --reverse --no-merges --pretty=format:"- %s" master..test | cat >> comments
