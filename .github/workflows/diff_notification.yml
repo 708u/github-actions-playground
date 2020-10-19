@@ -1,6 +1,7 @@
 name: comment_git_diff
 
 on:
+  push:
   pull_request:
     branches:
       - master
@@ -22,7 +23,7 @@ jobs:
 
     - name: Create comments
       run: |
-        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }} | cat >> comments
+        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.sha }}..${{ github.event.before }} | cat
         echo comments
 
     - name: Post multi-line comments
