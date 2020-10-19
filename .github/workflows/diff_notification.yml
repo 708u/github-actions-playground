@@ -21,6 +21,7 @@ jobs:
 
     - name: Create comments
       run: |
+        git pull origin master
         git branch -a | cat
         git log --reverse --no-merges --pretty=format:"- %s" master..test | cat >> comments
 
