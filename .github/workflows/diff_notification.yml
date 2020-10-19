@@ -22,7 +22,7 @@ jobs:
 
     - name: Create comments
       run: |
-        git log --reverse --no-merges --pretty=format:"- %s" ${TARGET_BRANCH}..${{ github.event.before }}
+        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.before }}..${{ github.event.after }}
 
     - name: Post multi-line comments
       env:
