@@ -7,7 +7,6 @@ on:
       - master
       - staging
     types: opened
-# git log --reverse --no-merges --pretty=format:"- %s" master..${TARGET_BRANCH} | cat >> comments
 # git diff origin/${GITHUB_BASE_REF}..origin/${GITHUB_HEAD_REF}
 # git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }}
 env:
@@ -23,7 +22,7 @@ jobs:
 
     - name: Create comments
       run: |
-        git log
+        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.before }} ..${TARGET_BRANCH}
 
     - name: Post multi-line comments
       env:
