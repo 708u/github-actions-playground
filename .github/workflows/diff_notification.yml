@@ -25,7 +25,7 @@ jobs:
       run: |
         BEFORE_SHA=$(jq -r '.before' $GITHUB_EVENT_PATH)
         AFTER_SHA=$(jq -r '.after' $GITHUB_EVENT_PATH)
-        git log --reverse --no-merges --pretty=format:"- %s" ${BEFORE_SHA}..${AFTER_SHA} | cat >> comments
+        git log --reverse --no-merges --pretty=format:"- %s" ${BEFORE_SHA}..${AFTER_SHA} | cat
 
     - name: Post multi-line comments
       env:
