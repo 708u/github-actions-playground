@@ -1,0 +1,27 @@
+name: comment_git_diff
+
+on:
+  pull_request:
+    branches:
+        - master
+        - staging
+    types: opened
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create comments
+      run: echo hello >> comments
+
+
+    - name: Post multi-line comments
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        URL: ${{ github.event.pull_request.comments_url }}
+      run: |
+        curl -X POST \
+             -H "Authorization: token ${GITHUB_TOKEN}" \
+             -d "{\"body\": \"$(cat comments)\"}" \
+             ${URL}
+
