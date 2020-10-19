@@ -1,6 +1,7 @@
 name: comment_git_diff
 
 on:
+  push:
   workflow_dispatch:
     branches:
       - master
