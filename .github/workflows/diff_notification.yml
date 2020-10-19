@@ -1,14 +1,11 @@
 name: comment_git_diff
 
 on:
-  push:
   pull_request:
     branches:
       - master
       - staging
     types: opened
-# git diff origin/${GITHUB_BASE_REF}..origin/${GITHUB_HEAD_REF}
-# git diff --name-only --diff-filter=AM ${{ github.event.before }} ${{ github.sha }}
 env:
     TARGET_BRANCH: ${{ github.base_ref }}
 
@@ -32,5 +29,5 @@ jobs:
         curl -X POST \
              -H "Authorization: token ${GITHUB_TOKEN}" \
              -d "{\"body\": \"$(cat comments)\"}" \
-             ${URL}
+             ${{ github.event.pull_request.comments_url }}
 
