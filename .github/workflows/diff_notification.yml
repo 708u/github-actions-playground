@@ -24,7 +24,7 @@ jobs:
 
     - name: Create comments
       run: |
-        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }} | cat | comments
+        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.before }}..${{ github.sha }} | cat >> comments
 
     - name: Post multi-line comments
       env:
