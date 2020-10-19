@@ -1,10 +1,14 @@
 name: comment_git_diff
 
 on:
+  workflow_dispatch:
+    branches:
+      - master
+      - staging
   pull_request:
     branches:
-        - master
-        - staging
+      - master
+      - staging
     types: opened
 
 jobs:
@@ -12,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Create comments
-      run: echo hello >> comments
+      run: |
+      first=$(sed)
+      git log --reverse --no-merges --pretty=format:"- %s" $first..$second | cat >> comments
 
 
     - name: Post multi-line comments
