@@ -6,8 +6,6 @@ on:
       - master
       - staging
     types: opened
-env:
-    TARGET_BRANCH: ${{ github.base_ref }}
 
 jobs:
   comment:
@@ -20,6 +18,7 @@ jobs:
     - name: Create comments
       run: |
         git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.pull_request.base.sha }}..${{ github.event.after }} >> comments
+        sed -i -z 's/\n/\\n/g' comments
 
     - name: Post multi-line comments
       env:
