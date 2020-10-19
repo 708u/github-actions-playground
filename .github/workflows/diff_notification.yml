@@ -17,14 +17,13 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@vs
       with:
         fetch-depth: 0
 
     - name: Create comments
       run: |
-        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.sha }}..${{ github.event.before }} | cat
-        echo comments
+        git log
 
     - name: Post multi-line comments
       env:
