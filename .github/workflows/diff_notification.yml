@@ -3,17 +3,22 @@ name: comment_git_diff
 on:
   pull_request:
     branches:
-        - master
-        - staging
+      - master
+      - staging
     types: opened
 
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-    - name: Create comments
-      run: echo hello >> comments
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
+    - name: Create comments
+      run: |
+        git log --reverse --no-merges --pretty=format:"- %s" ${{ github.event.pull_request.base.sha }}..${{ github.event.after }} >> comments
+        sed -i -z 's/\n/\\n/g' comments
 
     - name: Post multi-line comments
       env:
@@ -23,5 +28,5 @@ jobs:
         curl -X POST \
              -H "Authorization: token ${GITHUB_TOKEN}" \
              -d "{\"body\": \"$(cat comments)\"}" \
-             ${URL}
+             ${{ github.event.pull_request.comments_url }}
 
