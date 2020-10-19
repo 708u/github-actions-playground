@@ -22,7 +22,6 @@ jobs:
 
     - name: Create comments
       run: |
-        git fetch --depth 1 origin ${TARGET_BRANCH}
         git diff origin/${GITHUB_BASE_REF}..origin/${GITHUB_HEAD_REF}
 
     - name: Post multi-line comments
